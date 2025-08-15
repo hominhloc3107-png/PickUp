@@ -8,6 +8,7 @@ TOKEN = "8204925535:AAHMVkaaBbLA3Bls5c0MFr-X8sl36PRa_co"
 # Lưu túi đồ từng người chơi
 inventory = {}
 
+# Lệnh /start
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         "🐉 Chào mừng bạn đến với game ĐÁNH QUÁI NHẬN ĐỒ!\n"
@@ -15,6 +16,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "Dùng lệnh /inventory để xem túi đồ."
     )
 
+# Lệnh /hunt
 async def hunt(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
     user_name = update.effective_user.first_name
@@ -32,6 +34,7 @@ async def hunt(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         await update.message.reply_text(f"{user_name} bị {monster} đánh bại! Không có đồ 😢")
 
+# Lệnh /inventory
 async def show_inventory(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
     items = inventory.get(user_id, [])
@@ -40,6 +43,7 @@ async def show_inventory(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         await update.message.reply_text("🎒 Túi đồ của bạn đang trống.")
 
+# Khởi chạy bot
 def main():
     app = ApplicationBuilder().token(TOKEN).build()
     app.add_handler(CommandHandler("start", start))
